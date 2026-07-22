@@ -42,32 +42,32 @@ PhidgetsBldcHardware::on_init(const hardware_interface::HardwareInfo & info)
     // Map based on naming convention
     if (name.find("front_left") != std::string::npos) {
       device_serial_.push_back(default_serial);
-      hub_port_.push_back(3);
+      hub_port_.push_back(0);
       channel_.push_back(0);
       direction_sign_.push_back(-1.0);
     } else if (name.find("middle_left") != std::string::npos) {
       device_serial_.push_back(default_serial);
-      hub_port_.push_back(4);
+      hub_port_.push_back(1);
       channel_.push_back(0);
       direction_sign_.push_back(-1.0);
     } else if (name.find("rear_left") != std::string::npos) {
       device_serial_.push_back(default_serial);
-      hub_port_.push_back(5);
+      hub_port_.push_back(2);
       channel_.push_back(0);
       direction_sign_.push_back(-1.0);
     } else if (name.find("front_right") != std::string::npos) {
       device_serial_.push_back(default_serial);
-      hub_port_.push_back(2);
+      hub_port_.push_back(5);
       channel_.push_back(0);
       direction_sign_.push_back(1.0);
     } else if (name.find("middle_right") != std::string::npos) {
       device_serial_.push_back(default_serial);
-      hub_port_.push_back(1);
+      hub_port_.push_back(4);
       channel_.push_back(0);
       direction_sign_.push_back(1.0);
     } else if (name.find("rear_right") != std::string::npos) {
       device_serial_.push_back(default_serial);
-      hub_port_.push_back(0);
+      hub_port_.push_back(3);
       channel_.push_back(0);
       direction_sign_.push_back(1.0);
     } else {
@@ -392,7 +392,7 @@ void PhidgetsBldcHardware::try_attach_motor(int i)
   Phidget_setHubPort((PhidgetHandle)motors_[i], hub_port_[i]);
   Phidget_setChannel((PhidgetHandle)motors_[i], channel_[i]);
   
-  rc = Phidget_openWaitForAttachment((PhidgetHandle)motors_[i], 500);
+  rc = Phidget_openWaitForAttachment((PhidgetHandle)motors_[i], 3000);
   if (rc != EPHIDGET_OK) {
     close_phidget(i);
     return;
